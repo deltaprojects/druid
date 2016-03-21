@@ -22,12 +22,16 @@ package io.druid.guice;
 import com.fasterxml.jackson.annotation.JacksonInject;
 import com.fasterxml.jackson.databind.introspect.AnnotatedMember;
 import com.fasterxml.jackson.databind.introspect.AnnotatedMethod;
+import com.fasterxml.jackson.databind.introspect.AnnotationMap;
 import com.fasterxml.jackson.databind.introspect.NopAnnotationIntrospector;
 import com.google.inject.BindingAnnotation;
 import com.google.inject.Key;
 import com.metamx.common.IAE;
 
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
+import java.util.Arrays;
+import java.util.HashMap;
 
 /**
  */
@@ -39,9 +43,18 @@ public class GuiceAnnotationIntrospector extends NopAnnotationIntrospector
     if (m.getAnnotation(JacksonInject.class) == null) {
       return null;
     }
+    HashMap<Class<? extends Annotation>,Annotation> annotations;
+    try {
+      Field field = getField(m.getClass(), "_annotations");
+      AnnotationMap map = (AnnotationMap) field.get(m);
+      field = getField(map.getClass(), "_annotations");
+      annotations = (HashMap<Class<? extends Annotation>,Annotation>) field.get(map);
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    }
 
     Annotation guiceAnnotation = null;
-    for (Annotation annotation : m.annotations()) {
+    for (Annotation annotation : annotations.values()) {
       if (annotation.annotationType().isAnnotationPresent(BindingAnnotation.class)) {
         guiceAnnotation = annotation;
         break;
@@ -55,5 +68,19 @@ public class GuiceAnnotationIntrospector extends NopAnnotationIntrospector
       return Key.get(m.getGenericType());
     }
     return Key.get(m.getGenericType(), guiceAnnotation);
+  }
+
+  private static Field getField(Class<?> type, String fieldName) {
+    for (Field f : Arrays.asList(type.getDeclaredFields())) {
+      f.setAccessible(true);
+      if (f.getName().equals(fieldName)) {
+        return f;
+      }
+    }
+
+    if (type.getSuperclass() != null) {
+       return getField(type.getSuperclass(), fieldName);
+    }
+    return null;
   }
 }
