@@ -51,14 +51,14 @@
 
     <repositories>
        <repository>
-         <id>HDPReleases</id>
-         <name>Hortonworks HDP releases</name>
-         <url>http://repo.hortonworks.com/content/groups/public</url>
-       </repository>
-       <repository>
          <id>HDPPublic</id>
          <name>Hortonworks Mirror of Central</name>
          <url>http://repo.hortonworks.com/content/groups/public</url>
+       </repository>
+       <repository>
+         <id>HDPReleases</id>
+         <name>Hortonworks HDP releases</name>
+         <url>http://repo.hortonworks.com/content/repositories/releases</url>
        </repository>
     </repositories>
 
