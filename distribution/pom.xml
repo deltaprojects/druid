@@ -28,7 +28,7 @@
     <parent>
         <artifactId>druid</artifactId>
         <groupId>io.druid</groupId>
-        <version>0.9.2-d7</version>
+        <version>0.9.2-d8</version>
     </parent>
 
     <dependencies>
@@ -69,6 +69,10 @@
                                 <argument>${project.parent.version}</argument>
                                 <argument>-l</argument>
                                 <argument>${settings.localRepository}</argument>
+                                <argument>--remoteRepository</argument>
+                                <argument>http://repo.hortonworks.com/content/repositories/releases</argument>
+                                <argument>--remoteRepository</argument>
+                                <argument>http://repo.hortonworks.com/content/repositories/public</argument>
                                 <argument>-h</argument>
                                 <argument>org.apache.hadoop:hadoop-client:${hadoop.compile.version}</argument>
                                 <argument>-c</argument>
