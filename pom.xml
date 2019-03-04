@@ -62,19 +62,6 @@
 
     <inceptionYear>2011</inceptionYear>
 
-		<repositories>
-		   <repository>
-		     <id>HDPPublic</id>
-		     <name>Hortonworks Mirror of Central</name>
-		     <url>http://repo.hortonworks.com/content/groups/public</url>
-		   </repository>
-		   <repository>
-		     <id>HDPReleases</id>
-		     <name>Hortonworks HDP releases</name>
-		     <url>http://repo.hortonworks.com/content/repositories/releases</url>
-		   </repository>
-		</repositories>
-
     <scm>
         <connection>scm:git:ssh://git@github.com/apache/incubator-druid.git</connection>
         <developerConnection>scm:git:ssh://git@github.com/apache/incubator-druid.git</developerConnection>
@@ -184,6 +171,16 @@
     </modules>
 
     <repositories>
+		   <repository>
+		     <id>HDPPublic</id>
+		     <name>Hortonworks Mirror of Central</name>
+		     <url>http://repo.hortonworks.com/content/groups/public</url>
+		   </repository>
+		   <repository>
+		     <id>HDPReleases</id>
+		     <name>Hortonworks HDP releases</name>
+		     <url>http://repo.hortonworks.com/content/repositories/releases</url>
+		   </repository>
         <repository>
             <id>${repoOrgId}</id>
             <name>${repoOrgName}</name>
