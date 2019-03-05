@@ -29,7 +29,7 @@
 
     <groupId>org.apache.druid</groupId>
     <artifactId>druid</artifactId>
-    <version>0.13.0-incubating-d0</version>
+    <version>0.13.0-incubating-d3</version>
     <packaging>pom</packaging>
 
     <name>Druid</name>
